@@ -228,7 +228,7 @@ export function useFillParams(poolSettings: PoolSettings | undefined) {
             endTime: endTime_,
             message: [name, title, regions].join(MSG_DELIMITER),
             exchangeAddrs: exchangeTokens.map((x) => x.address),
-            ratios: exchangeAmountsDivided.flatMap((x) => x).map((y) => y.toFixed()),
+            ratios: exchangeAmountsDivided.flat().map((y) => y.toFixed()),
             unlockTime: unlockTime_,
             tokenAddrs: token!.address,
             total,
