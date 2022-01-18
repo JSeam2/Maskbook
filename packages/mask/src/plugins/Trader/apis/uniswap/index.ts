@@ -22,6 +22,7 @@ import subHours from 'date-fns/subHours'
 import subMonths from 'date-fns/subMonths'
 import subYears from 'date-fns/subYears'
 import getUnixTime from 'date-fns/getUnixTime'
+import startOfMinute from 'date-fns/startOfMinute'
 
 type Value = string | number | BigNumber | undefined
 
@@ -45,7 +46,7 @@ export const getPercentChange = (valueNow: Value, value24HoursAgo: Value) => {
  * Get timestamp from current, one hour ago, one day ago, a week ago
  */
 function getTimestampForChanges() {
-    const currentTime = new Date()
+    const currentTime = startOfMinute(Date.now())
     return {
         utcOneHourBack: getUnixTime(subHours(currentTime, 1)),
         utcOneDayBack: getUnixTime(subHours(currentTime, 24)),
