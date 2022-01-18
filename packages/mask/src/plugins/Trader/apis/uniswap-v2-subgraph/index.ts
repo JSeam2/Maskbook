@@ -1,4 +1,5 @@
 import { getTrendingConstants } from '@masknet/web3-shared-evm'
+import startOfDay from 'date-fns/startOfDay'
 import stringify from 'json-stable-stringify'
 import { chunk, first, flatten } from 'lodash-unified'
 import { currentChainIdSettings } from '../../../Wallet/settings'
@@ -179,7 +180,7 @@ export async function fetchTokensByKeyword(keyword: string) {
  * Fetch the daily token data.
  */
 export async function fetchTokenDayData(address: string, date: Date) {
-    const utcTimestamp = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())
+    const utcTimestamp = startOfDay(date).getTime()
     const data = await fetchFromUniswapV2Subgraph<{
         data: {
             tokenDayData: {

@@ -2,6 +2,7 @@ import { formatFileSize } from '@dimensiondev/kit'
 import { Typography, LinearProgress, Box } from '@mui/material'
 import { makeStyles } from '@masknet/theme'
 import { useI18N } from '../../locales/i18n_generated'
+import getUnixTime from 'date-fns/getUnixTime'
 
 const useStyles = makeStyles()({
     container: {
@@ -44,7 +45,7 @@ export const ProgressBar: React.FC<Props> = (props) => {
     const { classes } = useStyles()
     const { startedAt, fileSize, sendSize } = props
     const value = (sendSize / fileSize) * 100
-    const elapsed = (Date.now() - startedAt) / 1000
+    const elapsed = getUnixTime(Date.now() - startedAt)
     const remaining = (fileSize - sendSize) / (elapsed ? sendSize / elapsed : 0)
     const variant = props.preparing ? 'indeterminate' : 'determinate'
     let completion = t.uploading_preparing()

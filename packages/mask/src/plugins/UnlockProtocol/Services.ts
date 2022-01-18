@@ -1,3 +1,4 @@
+import getUnixTime from 'date-fns/getUnixTime'
 import { GraphQLClient, gql } from 'graphql-request'
 import stringify from 'json-stable-stringify'
 import urlcat from 'urlcat'
@@ -48,7 +49,7 @@ const verifyActiveLock = (data: { lock: string; address: string; chain: number }
         const keys = response.keyHolders[0].keys
         keys.forEach((key) => {
             if (key.lock.address === data.lock) {
-                const currentTimeInSeconds = Math.floor(Date.now() / 1000)
+                const currentTimeInSeconds = getUnixTime(Date.now())
                 const diff = key.expiration - currentTimeInSeconds
                 return diff > 0
             } else {

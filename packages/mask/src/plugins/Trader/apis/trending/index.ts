@@ -18,6 +18,8 @@ import {
 import { getNetworkTypeFromChainId, NetworkType } from '@masknet/web3-shared-evm'
 import { currentChainIdSettings, currentNetworkSettings } from '../../../Wallet/settings'
 import { Days } from '../../SNSAdaptor/trending/PriceChartDaysControl'
+import subDays from 'date-fns/subDays'
+import getUnixTime from 'date-fns/getUnixTime'
 
 /**
  * Get supported currencies of specific data provider
@@ -397,8 +399,7 @@ export async function getPriceStats(
                 return '5m'
             })()
             const endDate = new Date()
-            const startDate = new Date()
-            startDate.setDate(startDate.getDate() - days)
+            const startDate = subDays(endDate, days)
             const stats = await coinMarketCapAPI.getHistorical(
                 id,
                 currency.name.toUpperCase(),
@@ -410,8 +411,7 @@ export async function getPriceStats(
             return Object.entries(stats.data).map(([date, x]) => [date, x[currency.name.toUpperCase()][0]])
         case DataProvider.UNISWAP_INFO:
             const endTime = new Date()
-            const startTime = new Date()
-            startTime.setDate(endTime.getDate() - days)
+            const startTime = subDays(endTime, days)
             const uniswap_interval = (() => {
                 if (days === 0 || days > 365) return 86400 // max
                 if (days > 90) return 7200 // 1y
@@ -423,8 +423,8 @@ export async function getPriceStats(
                 id,
                 currency,
                 uniswap_interval,
-                Math.floor((days === Days.MAX ? BTC_FIRST_LEGER_DATE.getTime() : startTime.getTime()) / 1000),
-                Math.floor(endTime.getTime() / 1000),
+                getUnixTime(days === Days.MAX ? BTC_FIRST_LEGER_DATE : startTime),
+                getUnixTime(endTime),
             )
         default:
             return []

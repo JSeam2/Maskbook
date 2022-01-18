@@ -6,12 +6,18 @@ const PluginFileServiceMessage = createPluginMessage<{ _: unknown; _2: unknown }
 
 export const PluginFileServiceRPC = createPluginRPC<Omit<typeof import('./service'), 'upload' | 'setupDatabase'>>(
     PluginId.FileService,
-    () => import('./service').then(({ upload, setupDatabase, ...rest }) => rest),
+    async () => {
+        const { upload, setupDatabase, ...rest } = await import('./service')
+        return rest
+    },
     PluginFileServiceMessage._,
 )
 
 export const PluginFileServiceRPCGenerator = createPluginRPCGenerator(
     PluginId.FileService,
-    () => import('./service').then(({ upload }) => ({ upload })),
+    async () => {
+        const { upload } = await import('./service')
+        return { upload }
+    },
     PluginFileServiceMessage._2,
 )

@@ -49,35 +49,35 @@ async function getNftList(chainId: ChainId, account: string) {
     if (!data.result?.length) return []
     const connection = new Connection(ENDPOINT_KEY)
     const nftTokens = data.result.filter((x) => x.account.data.parsed.info.tokenAmount.decimals === 0)
-    const promises = nftTokens.map((x) =>
-        Metadata.load(connection, x.pubkey).then(async (metadata) => {
-            if (!metadata) return null
-            const externalMeta = await fetchJSON<ExternalMetadata>(metadata.data.data.uri).catch(() => null)
-            const pubkey = metadata.pubkey.toBase58()
-            return {
-                id: pubkey,
-                tokenId: pubkey,
-                chainId: chainId,
-                type: TokenType.NonFungible,
+    const promises = nftTokens.map(async (x): Promise<Web3Plugin.NonFungibleToken | null> => {
+        const metadata = await Metadata.load(connection, x.pubkey)
+        if (!metadata) return null
+        const externalMeta = await fetchJSON<ExternalMetadata>(metadata.data.data.uri).catch(() => null)
+        const pubkey = metadata.pubkey.toBase58()
+        return {
+            id: pubkey,
+            tokenId: pubkey,
+            chainId: chainId,
+            type: TokenType.NonFungible,
+            name: metadata.data.data.name,
+            description: externalMeta?.description,
+            contract: {
                 name: metadata.data.data.name,
-                description: externalMeta?.description,
-                contract: {
-                    name: metadata.data.data.name,
-                    symbol: metadata.data.data.symbol,
-                    chainId: ChainId.Mainnet,
-                    address: pubkey,
-                    tokenId: pubkey,
-                },
-                metadata: {
-                    name: metadata.data.data.name,
-                    description: metadata.data.data.name,
-                    mediaType: externalMeta?.properties?.category || 'Unknown',
-                    iconURL: '',
-                    assetURL: externalMeta?.animation ?? externalMeta?.image ?? '',
-                },
-            } as Web3Plugin.NonFungibleToken
-        }),
-    )
+                symbol: metadata.data.data.symbol,
+                chainId: ChainId.Mainnet,
+                address: pubkey,
+                // @ts-ignore unknown field
+                tokenId: pubkey,
+            },
+            metadata: {
+                name: metadata.data.data.name,
+                description: metadata.data.data.name,
+                mediaType: externalMeta?.properties?.category || 'Unknown',
+                iconURL: '',
+                assetURL: externalMeta?.animation ?? externalMeta?.image ?? '',
+            },
+        }
+    })
 
     const allSettled = await Promise.allSettled(promises)
     const tokens = allSettled

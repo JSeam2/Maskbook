@@ -18,6 +18,10 @@ import {
 } from '../blocks'
 import { fetchLatestBlocks } from '../uniswap-health'
 import { isGreaterThan, isLessThanOrEqualTo } from '@masknet/web3-shared-base'
+import subHours from 'date-fns/subHours'
+import subMonths from 'date-fns/subMonths'
+import subYears from 'date-fns/subYears'
+import getUnixTime from 'date-fns/getUnixTime'
 
 type Value = string | number | BigNumber | undefined
 
@@ -42,60 +46,13 @@ export const getPercentChange = (valueNow: Value, value24HoursAgo: Value) => {
  */
 function getTimestampForChanges() {
     const currentTime = new Date()
-
-    const utcOneHourBack = Date.UTC(
-        currentTime.getUTCFullYear(),
-        currentTime.getUTCMonth(),
-        currentTime.getUTCDate(),
-        currentTime.getUTCHours() - 1,
-        currentTime.getUTCMinutes(),
-    )
-    const utcOneDayBack = Date.UTC(
-        currentTime.getUTCFullYear(),
-        currentTime.getUTCMonth(),
-        currentTime.getUTCDate() - 1,
-        currentTime.getUTCHours(),
-        currentTime.getUTCMinutes(),
-    )
-    const utcWeekBack = Date.UTC(
-        currentTime.getUTCFullYear(),
-        currentTime.getUTCMonth(),
-        currentTime.getUTCDate() - 7,
-        currentTime.getUTCHours(),
-        currentTime.getUTCMinutes(),
-    )
-
-    const utcTwoWeekBack = Date.UTC(
-        currentTime.getUTCFullYear(),
-        currentTime.getUTCMonth(),
-        currentTime.getUTCDate() - 14,
-        currentTime.getUTCHours(),
-        currentTime.getUTCMinutes(),
-    )
-
-    const utcOneMonthBack = Date.UTC(
-        currentTime.getUTCFullYear(),
-        currentTime.getUTCMonth() - 1,
-        currentTime.getUTCDate(),
-        currentTime.getUTCHours(),
-        currentTime.getUTCMinutes(),
-    )
-
-    const utcOneYearBack = Date.UTC(
-        currentTime.getUTCFullYear() - 1,
-        currentTime.getUTCMonth(),
-        currentTime.getUTCDate(),
-        currentTime.getUTCHours(),
-        currentTime.getUTCMinutes(),
-    )
-
     return {
-        utcOneHourBack: Math.floor(utcOneHourBack / 1000),
-        utcOneDayBack: Math.floor(utcOneDayBack / 1000),
-        utcWeekBack: Math.floor(utcWeekBack / 1000),
-        utcTwoWeekBack: Math.floor(utcTwoWeekBack / 1000),
-        utcOneMonthBack: Math.floor(utcOneMonthBack / 1000),
-        utcOneYearBack: Math.floor(utcOneYearBack / 1000),
+        utcOneHourBack: getUnixTime(subHours(currentTime, 1)),
+        utcOneDayBack: getUnixTime(subHours(currentTime, 24)),
+        utcWeekBack: getUnixTime(subHours(currentTime, 24 * 7)),
+        utcTwoWeekBack: getUnixTime(subHours(currentTime, 24 * 14)),
+        utcOneMonthBack: getUnixTime(subMonths(currentTime, 1)),
+        utcOneYearBack: getUnixTime(subYears(currentTime, 1)),
     }
 }
 

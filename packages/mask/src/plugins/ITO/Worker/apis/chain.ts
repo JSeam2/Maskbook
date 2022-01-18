@@ -8,6 +8,7 @@ import type { PoolFromNetwork, JSON_PayloadFromChain } from '../../types'
 import { MSG_DELIMITER, ITO_CONTRACT_BASE_TIMESTAMP } from '../../constants'
 import { getTransactionReceipt } from '../../../../extension/background-script/EthereumService'
 import { checkAvailability } from './checkAvailability'
+import startOfSecond from 'date-fns/startOfSecond'
 
 const interFace = new Interface(ITO_ABI)
 
@@ -72,17 +73,20 @@ export async function getAllPoolsAsSeller(
                 const [sellerName = '', message = '', regions = '-'] = decodedInputParam._message.split(MSG_DELIMITER)
 
                 const payload: JSON_PayloadFromChain = {
-                    end_time: (decodedInputParam._end.toNumber() + ITO_CONTRACT_BASE_TIMESTAMP / 1000) * 1000,
+                    end_time: startOfSecond(decodedInputParam._end.toNumber() + ITO_CONTRACT_BASE_TIMESTAMP).getTime(),
                     exchange_token_addresses: decodedInputParam._exchange_addrs,
                     limit: decodedInputParam._limit.toString(),
                     message,
                     qualification_address: decodedInputParam._qualification,
                     exchange_amounts: decodedInputParam._ratios.map((v) => v.toString()),
-                    start_time: (decodedInputParam._start.toNumber() + ITO_CONTRACT_BASE_TIMESTAMP / 1000) * 1000,
+                    start_time: startOfSecond(
+                        decodedInputParam._start.toNumber() + ITO_CONTRACT_BASE_TIMESTAMP,
+                    ).getTime(),
                     token_address: decodedInputParam._token_addr,
                     total: decodedInputParam._total_tokens.toString(),
-                    unlock_time:
-                        (decodedInputParam._unlock_time.toNumber() + ITO_CONTRACT_BASE_TIMESTAMP / 1000) * 1000,
+                    unlock_time: startOfSecond(
+                        decodedInputParam._unlock_time.toNumber() + ITO_CONTRACT_BASE_TIMESTAMP,
+                    ).getTime(),
                     seller: {
                         address: cur.from,
                         name: sellerName,

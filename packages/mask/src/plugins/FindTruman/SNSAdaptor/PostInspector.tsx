@@ -26,6 +26,7 @@ import {
 } from '../Worker/apis'
 import { FindTruman_Const } from '../constants'
 import { useI18N } from '../../../utils'
+import getUnixTime from 'date-fns/getUnixTime'
 
 export interface PostInspectorProps {
     url: string
@@ -139,7 +140,7 @@ export function PostInspector(props: PostInspectorProps) {
                     submitPuzzle(account, {
                         target: userPuzzleStatus?.id || '',
                         from: account,
-                        timestamp: Math.floor(Date.now() / 1000),
+                        timestamp: getUnixTime(Date.now()),
                         choice,
                     })
                         .then(async (res) => {
@@ -154,7 +155,7 @@ export function PostInspector(props: PostInspectorProps) {
                     submitPoll(account, {
                         target: userPollStatus?.id || '',
                         from: account,
-                        timestamp: Math.floor(Date.now() / 1000),
+                        timestamp: getUnixTime(Date.now()),
                         choice,
                     })
                         .then(async (res) => {

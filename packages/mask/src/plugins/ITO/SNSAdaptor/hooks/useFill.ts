@@ -23,6 +23,8 @@ import { gcd, sortTokens } from '../helpers'
 import { ITO_CONTRACT_BASE_TIMESTAMP, MSG_DELIMITER } from '../../constants'
 import type { AdvanceSettingData } from '../AdvanceSetting'
 import { useI18N } from '../../../../utils/i18n-next-ui'
+import startOfSecond from 'date-fns/startOfSecond'
+import getUnixTime from 'date-fns/getUnixTime'
 
 export interface PoolSettings {
     password: string
@@ -111,11 +113,11 @@ export function useFillCallback(poolSettings?: PoolSettings) {
         // the given settings is valid
         setFillSettings({
             ...poolSettings,
-            startTime: new Date(Math.floor(startTime.getTime() / 1000) * 1000),
-            endTime: new Date(Math.floor(endTime.getTime() / 1000) * 1000),
-            unlockTime: unlockTime ? new Date(Math.floor(unlockTime.getTime() / 1000) * 1000) : undefined,
+            startTime: startOfSecond(startTime),
+            endTime: startOfSecond(endTime),
+            unlockTime: unlockTime ? startOfSecond(unlockTime) : undefined,
             password: signedPassword,
-            exchangeAmounts: paramsObj.exchangeAmountsDivided.flatMap((x) => x).map((y) => y.toFixed()),
+            exchangeAmounts: paramsObj.exchangeAmountsDivided.flat().map((y) => y.toFixed()),
         })
 
         // start waiting for provider to confirm tx
@@ -203,10 +205,10 @@ export function useFillParams(poolSettings: PoolSettings | undefined) {
         const exchangeAmounts = sorted.map((x) => x.amount)
         const exchangeTokens = sorted.map((x) => x.token)
 
-        const startTime_ = Math.floor((startTime.getTime() - ITO_CONTRACT_BASE_TIMESTAMP) / 1000)
-        const endTime_ = Math.floor((endTime.getTime() - ITO_CONTRACT_BASE_TIMESTAMP) / 1000)
-        const unlockTime_ = unlockTime ? Math.floor((unlockTime.getTime() - ITO_CONTRACT_BASE_TIMESTAMP) / 1000) : 0
-        const now = Math.floor((Date.now() - ITO_CONTRACT_BASE_TIMESTAMP) / 1000)
+        const startTime_ = getUnixTime(startTime.getTime() - ITO_CONTRACT_BASE_TIMESTAMP)
+        const endTime_ = getUnixTime(endTime.getTime() - ITO_CONTRACT_BASE_TIMESTAMP)
+        const unlockTime_ = unlockTime ? getUnixTime(unlockTime.getTime() - ITO_CONTRACT_BASE_TIMESTAMP) : 0
+        const now = getUnixTime(Date.now() - ITO_CONTRACT_BASE_TIMESTAMP)
 
         const ONE_TOKEN = ONE.shiftedBy(token!.decimals ?? 0)
         const exchangeAmountsDivided = exchangeAmounts.map((x, i) => {

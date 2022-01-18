@@ -12,6 +12,7 @@ import { WalletMessages } from '../../Wallet/messages'
 import { useMaskClaimCallback } from './hooks/useMaskClaimCallback'
 import { useMaskITO_Packet } from './hooks/useMaskITO_Packet'
 import { useI18N } from '../../../utils/i18n-next-ui'
+import getUnixTime from 'date-fns/getUnixTime'
 
 const useStyles = makeStyles()((theme) => ({
     root: {
@@ -165,7 +166,7 @@ export function ITO_Card(props: ITO_CardProps) {
                             className={classes.button}
                             variant="contained"
                             disabled={
-                                Number.parseInt(packet.unlockTime, 10) > Math.round(Date.now() / 1000) ||
+                                Number.parseInt(packet.unlockTime, 10) > getUnixTime(Date.now()) ||
                                 packet.claimable === '0'
                             }
                             onClick={onClaimButtonClick}>

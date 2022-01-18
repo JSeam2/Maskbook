@@ -2,6 +2,7 @@ import { openDB, wrap } from 'idb/with-async-ittr'
 import type { BackupFormat, Instance, ObjectStore } from './types'
 import typeson from './typeson'
 import { useI18N } from '../../utils'
+import formatDateTime from 'date-fns/format'
 
 export const DatabaseOps: React.FC = () => {
     const { t } = useI18N()
@@ -10,17 +11,7 @@ export const DatabaseOps: React.FC = () => {
         if (payload === undefined) {
             return
         }
-        const timestamp = ((value: Date) => {
-            const values = [
-                value.getUTCFullYear(),
-                value.getUTCMonth() + 1,
-                value.getUTCDate(),
-                value.getUTCHours(),
-                value.getUTCMinutes(),
-                value.getUTCSeconds(),
-            ]
-            return values.map((value) => value.toString().padStart(2, '0')).join('')
-        })(new Date())
+        const timestamp = formatDateTime(Date.now(), 'yyyyMMddHHMMSS')
         download(`masknetwork-dump-${timestamp}.json`, payload)
     }
     const onRestore = async () => {

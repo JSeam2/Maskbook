@@ -30,6 +30,7 @@ import { decodeRegionCode, encodeRegionCode, regionCodes, useRegionSelect } from
 import { AdvanceSettingData, AdvanceSetting } from './AdvanceSetting'
 import { ExchangeTokenPanelGroup } from './ExchangeTokenPanelGroup'
 import { RegionSelect } from './RegionSelect'
+import fromUnixTime from 'date-fns/fromUnixTime'
 
 const useStyles = makeStyles()((theme) => {
     const smallQuery = `@media (max-width: ${theme.breakpoints.values.sm}px)`
@@ -291,8 +292,7 @@ export function CreateForm(props: CreateFormProps) {
         if (endTime >= unlockTime && advanceSettingData.delayUnlocking) return t('plugin_ito_error_unlock_time')
 
         if (qualification?.startTime) {
-            if (new Date(Number(qualification.startTime) * 1000) >= endTime)
-                return t('plugin_ito_error_qualification_start_time')
+            if (fromUnixTime(+qualification.startTime) >= endTime) return t('plugin_ito_error_qualification_start_time')
         }
 
         if (!qualification?.isQualification && advanceSettingData.contract && qualificationAddress.length > 0) {
@@ -454,10 +454,10 @@ export function CreateForm(props: CreateFormProps) {
                             ) : null,
                         }}
                     />
-                    {qualification?.startTime && new Date(Number(qualification.startTime) * 1000) > startTime ? (
+                    {qualification?.startTime && fromUnixTime(Number(qualification.startTime)) > startTime ? (
                         <div className={classes.qualStartTime}>
                             <Typography>{t('plugin_ito_qualification_start_time')}</Typography>
-                            <Typography>{new Date(Number(qualification.startTime) * 1000).toString()}</Typography>
+                            <Typography>{fromUnixTime(Number(qualification.startTime)).toLocaleString()}</Typography>
                         </div>
                     ) : null}
                 </Box>

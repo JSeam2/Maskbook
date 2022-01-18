@@ -16,6 +16,7 @@ import { EthereumBlockie } from '../../../web3/UI/EthereumBlockie'
 import { SnapshotContext } from '../context'
 import { useProposal } from './hooks/useProposal'
 import { SnapshotCard } from './SnapshotCard'
+import fromUnixTime from 'date-fns/fromUnixTime'
 
 export interface InformationCardProps {}
 
@@ -112,7 +113,7 @@ export function InformationCard(props: InformationCardProps) {
                     </Link>
                 </InfoField>
                 <InfoField title={t('plugin_snapshot_info_start')}>
-                    {formatDateTime(start * 1000, 'MM/dd/yyyy')}
+                    {formatDateTime(fromUnixTime(start), 'MM/dd/yyyy')}
                 </InfoField>
                 <InfoField title={t('plugin_snapshot_info_end')}>{formatDateTime(end * 1000, 'MM/dd/yyyy')}</InfoField>
                 <InfoField title={t('plugin_snapshot_info_snapshot')}>
