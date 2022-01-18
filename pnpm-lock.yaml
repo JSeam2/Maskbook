@@ -3454,29 +3454,9 @@ packages:
       '@msgpack/msgpack': 1.12.2
     dev: false
 
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  /@dimensiondev/eslint-plugin/0.0.1-20220117062517-fd3cb01_eslint@8.5.0:
-    resolution: {integrity: sha512-WtUberb1MC1s554Lm3C3mno3Nf/TdVJP80htgpNWiGOcIk+WYwQi+gWqi5IlnqGd71bYRZPYpYs2MH+GS+dbuw==, tarball: download/@dimensiondev/eslint-plugin/0.0.1-20220117062517-fd3cb01/8298f20d707432bcb777cd5084173fc894362a3496e8f8bc6a5c85070adb77cf}
-    engines: {node: '>= 14'}
-=======
-  /@dimensiondev/eslint-plugin/0.0.1-20220118023415-187d5dd_eslint@8.5.0:
-    resolution: {integrity: sha512-Nq2EQ3UQcEXLdiZvrEhXAMb7xjk4dC0NiFZE/fyt10Ji2UjYkKX5Kqj7yRER3LOVY2gSdfNp9bSqHLrx6IPdPQ==, tarball: download/@dimensiondev/eslint-plugin/0.0.1-20220118023415-187d5dd/70caf24fa1f02c82ca09d6cd5ba17063a6704b68651353ad116b97aab49539a1}
->>>>>>> 7a8951dbb (chore: improve linter)
-=======
-  /@dimensiondev/eslint-plugin/0.0.1-20220118025522-75b7a78_eslint@8.5.0:
-    resolution: {integrity: sha512-nYvQChntwNokn0Q7j04rDaJEBZMEGfzi0UpjsRLTizRqWlr2Pe3KVWo+Vnm6xcCaY/O4oBjUpEO0bvwu1p/yvA==, tarball: download/@dimensiondev/eslint-plugin/0.0.1-20220118025522-75b7a78/f10248c0e63f115fdc74536eb29cdedd4fdcbd05591bb127de16f4f58b6a648f}
->>>>>>> f69ccb6c0 (fix: no-unneeded-flat-map)
-=======
-  /@dimensiondev/eslint-plugin/0.0.1-20220118033601-132f5ff_eslint@8.5.0:
-    resolution: {integrity: sha512-rz9iGWBQ59CCSUtWulPwY+BeaIDmxGnsNebrAhJbuPfdB4N+06HjO1OosP3XmCtJ7Q5Bxy7+UYigekWuBJVpOg==, tarball: download/@dimensiondev/eslint-plugin/0.0.1-20220118033601-132f5ff/cde6cbfd5173949d1cd87648bc60bdb1c081827387d689444e1d112ab0b1151a}
->>>>>>> f2e3bd9df (chore: upgrade)
-=======
   /@dimensiondev/eslint-plugin/0.0.1-20220118230812-e301206_eslint@8.5.0:
     resolution: {integrity: sha512-2On11PSOb4Y+1OcFxQb5e+Ao+eAXOB8T5mTFmEaxJ5m1FbvqZPKMihZuijuRKFAD3cUcz/nvSMoEzYL02sWAuw==, tarball: download/@dimensiondev/eslint-plugin/0.0.1-20220118230812-e301206/3caef07e6575c8a426f890c28603dd736738febc44b42c2d61d31c1099f58b7e}
->>>>>>> Stashed changes
+    engines: {node: '>= 14'}
     peerDependencies:
       eslint: '>= 8'
     dependencies:
