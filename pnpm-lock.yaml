@@ -10,7 +10,7 @@ importers:
     specifiers:
       '@commitlint/cli': ^16.0.0
       '@commitlint/config-conventional': ^16.0.0
-      '@dimensiondev/eslint-plugin': ^0.0.1-20220118033601-132f5ff
+      '@dimensiondev/eslint-plugin': ^0.0.1-20220118230812-e301206
       '@dimensiondev/kit': 0.0.0-20211215044858-27d964f
       '@dimensiondev/patch-package': ^6.5.0
       '@emotion/cache': ^11.7.1
@@ -89,7 +89,7 @@ importers:
     devDependencies:
       '@commitlint/cli': 16.0.0
       '@commitlint/config-conventional': 16.0.0
-      '@dimensiondev/eslint-plugin': 0.0.1-20220118033601-132f5ff_eslint@8.5.0
+      '@dimensiondev/eslint-plugin': 0.0.1-20220118230812-e301206_eslint@8.5.0
       '@dimensiondev/patch-package': 6.5.0
       '@jest/globals': 27.4.4
       '@magic-works/i18n-codegen': 0.0.6_typescript@4.6.0-dev.20211202
@@ -3454,6 +3454,7 @@ packages:
       '@msgpack/msgpack': 1.12.2
     dev: false
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -3472,9 +3473,14 @@ packages:
   /@dimensiondev/eslint-plugin/0.0.1-20220118033601-132f5ff_eslint@8.5.0:
     resolution: {integrity: sha512-rz9iGWBQ59CCSUtWulPwY+BeaIDmxGnsNebrAhJbuPfdB4N+06HjO1OosP3XmCtJ7Q5Bxy7+UYigekWuBJVpOg==, tarball: download/@dimensiondev/eslint-plugin/0.0.1-20220118033601-132f5ff/cde6cbfd5173949d1cd87648bc60bdb1c081827387d689444e1d112ab0b1151a}
 >>>>>>> f2e3bd9df (chore: upgrade)
+=======
+  /@dimensiondev/eslint-plugin/0.0.1-20220118230812-e301206_eslint@8.5.0:
+    resolution: {integrity: sha512-2On11PSOb4Y+1OcFxQb5e+Ao+eAXOB8T5mTFmEaxJ5m1FbvqZPKMihZuijuRKFAD3cUcz/nvSMoEzYL02sWAuw==, tarball: download/@dimensiondev/eslint-plugin/0.0.1-20220118230812-e301206/3caef07e6575c8a426f890c28603dd736738febc44b42c2d61d31c1099f58b7e}
+>>>>>>> Stashed changes
     peerDependencies:
       eslint: '>= 8'
     dependencies:
+      bignumber.js: 9.0.2
       eslint: 8.5.0
     dev: true
 
@@ -10566,7 +10572,6 @@ packages:
 
   /bignumber.js/9.0.2:
     resolution: {integrity: sha512-GAcQvbpsM0pUb0zw1EI0KhQEZ+lRwR5fYaAp3vPOYuP7aDvGy6cVN6XHLauvF8SOga2y0dcLcjt3iQDTSEliyw==}
-    dev: false
 
   /binary-extensions/1.13.1:
     resolution: {integrity: sha512-Un7MIEDdUC5gNpcGDV97op1Ywk748MpHcFTHoYs6qnj1Z3j7I53VG3nwZhKzoBZmbdRNnb6WRdFlwl7tSDuZGw==}

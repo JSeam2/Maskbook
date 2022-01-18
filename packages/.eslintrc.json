@@ -99,6 +99,7 @@
                 "@dimensiondev/no-simple-string-interpolation": "error",
                 "@dimensiondev/no-then": "error",
                 "@dimensiondev/no-timer": "error",
+                "@dimensiondev/prefer-array-sort": "error",
                 "@typescript-eslint/no-explicit-any": "error"
             }
         }
