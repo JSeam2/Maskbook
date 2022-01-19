@@ -62,43 +62,37 @@ export function getERC721TokenRecordIntoDBKey(address: string, tokenId: string) 
     return `${formatEthereumAddress(address)}_${tokenId}`
 }
 
-export function ERC721TokenRecordIntoDB(x: ERC721TokenDetailed) {
-    const record: ERC721TokenRecordInDatabase = {
+export function ERC721TokenRecordIntoDB(x: ERC721TokenDetailed): ERC721TokenRecordInDatabase {
+    return {
         ...x,
         // NFT cannot be divided and store each token separately
         record_id: getERC721TokenRecordIntoDBKey(x.contractDetailed.address, x.tokenId),
     }
-    return record
 }
 
-export function ERC721TokenRecordOutDB(x: ERC721TokenRecordInDatabase) {
-    const record: ERC721TokenDetailed = omit(x, 'record_id')
-    return record
+export function ERC721TokenRecordOutDB(x: ERC721TokenRecordInDatabase): ERC721TokenDetailed {
+    return omit(x, 'record_id')
 }
 
-export function ERC1155TokenRecordIntoDB(x: ERC1155TokenRecord) {
-    const record: ERC1155TokenRecordInDatabase = {
+export function ERC1155TokenRecordIntoDB(x: ERC1155TokenRecord): ERC1155TokenRecordInDatabase {
+    return {
         ...x,
         // NFT cannot be divided and store each token separately
         record_id: `${formatEthereumAddress(x.address)}_${x.tokenId}`,
     }
-    return record
 }
 
-export function ERC1155TokenRecordOutDB(x: ERC1155TokenRecordInDatabase) {
-    const record: ERC1155TokenRecord = omit(x, 'record_id')
-    return record
+export function ERC1155TokenRecordOutDB(x: ERC1155TokenRecordInDatabase): ERC1155TokenRecord {
+    return omit(x, 'record_id')
 }
 
-export function TransactionChunkRecordIntoDB(x: TransactionChunkRecord) {
-    const record: TransactionChunkRecordInDatabase = {
+export function TransactionChunkRecordIntoDB(x: TransactionChunkRecord): TransactionChunkRecordInDatabase {
+    return {
         ...x,
         record_id: `${x.chain_id}_${formatEthereumAddress(x.address)}`,
     }
-    return record
 }
 
-export function TransactionChunkRecordOutDB(x: TransactionChunkRecordInDatabase) {
-    const record: TransactionChunkRecord = omit(x, 'record_id')
-    return record
+export function TransactionChunkRecordOutDB(x: TransactionChunkRecordInDatabase): TransactionChunkRecord {
+    return omit(x, 'record_id')
 }

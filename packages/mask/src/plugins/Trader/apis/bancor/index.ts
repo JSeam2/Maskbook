@@ -27,8 +27,8 @@ const getTargetAmount = async (
         amount: roundDecimal(request.fromAmount, request.fromToken.decimals),
     })
     const response = await fetch(url)
-    const data = await response.json()
-    return data
+
+    return response.json()
 }
 
 const getSourceAmount = async (
@@ -43,8 +43,8 @@ const getSourceAmount = async (
         amount: roundDecimal(request.toAmount, request.toToken.decimals),
     })
     const response = await fetch(url)
-    const data = await response.json()
-    return data
+
+    return response.json()
 }
 
 export const swapTransactionBancor = async (

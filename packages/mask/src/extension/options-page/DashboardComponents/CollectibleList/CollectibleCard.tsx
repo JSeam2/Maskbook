@@ -53,9 +53,8 @@ export function CollectibleCard(props: CollectibleCardProps) {
     const mediaUrl = token.info.mediaUrl
     const { loading, value } = useAsyncRetry(async () => {
         if (!mediaUrl) return
-
-        const blob = await (await fetch(mediaUrl)).blob()
-        return blob
+        const response = await fetch(mediaUrl)
+        return response.blob()
     }, [mediaUrl])
 
     const mimeType = value?.type || ''

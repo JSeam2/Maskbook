@@ -117,14 +117,14 @@ export async function getRedPacketHistory(address: string, chainId: ChainId) {
     if (!data?.redPackets) return []
 
     return data.redPackets
-        .map((x) => {
+        .map((x): RedPacketJSONPayload => {
             const token = tokenIntoMask({ ...x.token }) as FungibleTokenDetailed
             if (isSameAddress(x.token.address, NATIVE_TOKEN_ADDRESS)) {
                 token.name = getChainDetailed(x.token.chain_id)?.nativeCurrency.name
                 token.symbol = getChainDetailed(chainId)?.nativeCurrency.symbol
             }
 
-            const redpacketPayload: RedPacketJSONPayload = {
+            return {
                 contract_address: x.contract_address,
                 rpid: x.rpid,
                 txid: x.txid,
@@ -146,8 +146,6 @@ export async function getRedPacketHistory(address: string, chainId: ChainId) {
                 total_remaining: x.total_remaining,
                 block_number: x.block_number,
             }
-
-            return redpacketPayload
         })
         .sort((a, b) => b.creation_time - a.creation_time)
 }

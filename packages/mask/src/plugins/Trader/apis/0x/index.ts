@@ -22,7 +22,7 @@ export async function swapQuote(request: SwapQuoteRequest, networkType: NetworkT
         params.buyTokenPercentageFee = new BigNumber(request.buyTokenPercentageFee).dividedBy(100).toFixed()
 
     const response = await fetch(urlcat(ZRX_BASE_URL[networkType], 'swap/v1/quote', params))
-    const response_ = (await response.json()) as SwapQuoteResponse | SwapErrorResponse
+    const response_: SwapQuoteResponse | SwapErrorResponse = await response.json()
 
     const validationErrorResponse = response_ as SwapValidationErrorResponse
     if (validationErrorResponse.code)
@@ -32,6 +32,5 @@ export async function swapQuote(request: SwapQuoteRequest, networkType: NetworkT
     if (serverErrorResponse.reason)
         throw new Error(first(validationErrorResponse.validationErrors)?.reason || 'Unknown Error')
 
-    const successResponse = response_ as SwapQuoteResponse
-    return successResponse
+    return response_ as SwapQuoteResponse
 }

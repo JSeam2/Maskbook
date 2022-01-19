@@ -14,12 +14,10 @@ export function useAssetsMerged(...listOfTokens: Asset[][]) {
     const chainId = useChainId()
     const { NATIVE_TOKEN_ADDRESS } = useTokenConstants()
 
-    const mergedAssets = useMemo(() => {
+    return useMemo(() => {
         if (!NATIVE_TOKEN_ADDRESS) return EMPTY_LIST
         return uniqBy(listOfTokens.flat(), (x) => `${x.token.chainId}_${formatEthereumAddress(x.token.address)}`).sort(
             makeSortAssertFn(chainId),
         )
     }, [NATIVE_TOKEN_ADDRESS, ...listOfTokens, chainId])
-
-    return mergedAssets
 }

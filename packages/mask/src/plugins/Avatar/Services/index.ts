@@ -23,8 +23,8 @@ export async function getNFTAvatar(userId: string) {
 export async function saveNFTAvatar(address: string, nft: AvatarMetaDB) {
     const signature = await personalSign(nft.userId, address)
     setUserAddress(nft.userId, address)
-    const avatar = await saveNFTAvatarToRSS(address, nft, signature)
-    return avatar
+
+    return saveNFTAvatarToRSS(address, nft, signature)
 }
 
 export async function getAddress(userId: string) {

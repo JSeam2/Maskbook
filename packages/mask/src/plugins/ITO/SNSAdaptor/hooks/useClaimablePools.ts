@@ -60,12 +60,12 @@ export function useClaimablePools(chainId: ChainId, isMainnetOld = false) {
 
     const loading = loadingPool || loadingTokens
 
-    return useAsyncRetry(async () => {
+    return useAsyncRetry(async (): Promise<SwappedToken[]> => {
         const chainDetailed = getChainDetailed(chainId)
 
-        if (!chainDetailed || loading) return undefined
+        if (!chainDetailed || loading) return []
         if ((isMainnetOld && chainId !== ChainId.Mainnet) || pools.length === 0) return []
-        if (!contractAddress) return undefined
+        if (!contractAddress) return []
 
         const raws = await Promise.all(
             pools.map(async (value) => {
@@ -73,7 +73,8 @@ export function useClaimablePools(chainId: ChainId, isMainnetOld = false) {
                 return { availability, ...value }
             }),
         )
-        const swappedTokens: SwappedToken[] = raws
+
+        return raws
             .filter(
                 (raw) =>
                     raw.availability.exchange_addrs.length !== 0 &&
@@ -108,8 +109,6 @@ export function useClaimablePools(chainId: ChainId, isMainnetOld = false) {
                 return acc
             }, [])
             .sort((a, b) => b.unlockTime.getTime() - a.unlockTime.getTime())
-
-        return swappedTokens
     }, [JSON.stringify(pools), account, chainId, loading, contractAddress])
 }
 

@@ -39,8 +39,8 @@ const verifyHolder = async <verifyHolderResponse>(_lockAddress: String, _holder:
     const variables = {
         address: _holder,
     }
-    const data = await graphQLClients[_chain].request(query, variables)
-    return data
+
+    return graphQLClients[_chain].request(query, variables)
 }
 
 const verifyActiveLock = (data: { lock: string; address: string; chain: number }) => {

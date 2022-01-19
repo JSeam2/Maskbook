@@ -17,7 +17,7 @@ export function useTradeComputed(
         const outputAmountWei = rightShift(trade.toAmount || '0', outputToken.decimals)
         const minimumReceivedWei = rightShift(trade.minimumReceived, outputToken.decimals)
 
-        const tradeComputed: TradeComputed<SwapBancorRequest> = {
+        return {
             strategy,
             inputToken,
             outputToken,
@@ -29,7 +29,6 @@ export function useTradeComputed(
             minimumReceived: minimumReceivedWei,
             priceImpact: ZERO,
             trade_: { ...trade },
-        }
-        return tradeComputed
+        } as TradeComputed<SwapBancorRequest>
     }, [trade, strategy, inputToken, outputToken])
 }

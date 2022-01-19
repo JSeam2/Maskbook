@@ -17,7 +17,7 @@ import Services from '../../../extension/service'
 export function useGameContractAddress(id: string) {
     const { GOOD_GHOSTING_CONTRACT_ADDRESS_FILE } = useGoodGhostingConstants()
 
-    const asyncResult = useAsyncRetry(async (): Promise<GameMetaData> => {
+    return useAsyncRetry(async (): Promise<GameMetaData> => {
         if (!GOOD_GHOSTING_CONTRACT_ADDRESS_FILE)
             return {
                 contractAddress: '',
@@ -26,8 +26,6 @@ export function useGameContractAddress(id: string) {
         const gameData: any = await Services.Helper.fetchJSON(GOOD_GHOSTING_CONTRACT_ADDRESS_FILE)
         return gameData?.[id] || gameData?.default || {}
     }, [id, GOOD_GHOSTING_CONTRACT_ADDRESS_FILE])
-
-    return asyncResult
 }
 
 export function useGameInfo(gameData: GameMetaData) {
@@ -157,7 +155,7 @@ export function useTimeline(info: GoodGhostingInfo) {
     const roundDuration = info.segmentLength
     const numberOfRounds = info.lastSegment && info.lastSegment + 1
 
-    const timeline: TimelineEvent[] = useMemo(() => {
+    return useMemo((): TimelineEvent[] => {
         if (!startTime || !roundDuration || !numberOfRounds) return []
         const initialDate = new Date(startTime * 1000)
         const rounds: TimelineEvent[] = []
@@ -169,6 +167,4 @@ export function useTimeline(info: GoodGhostingInfo) {
         }
         return rounds
     }, [startTime, roundDuration, numberOfRounds])
-
-    return timeline
 }
