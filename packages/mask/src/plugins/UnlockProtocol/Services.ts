@@ -1,3 +1,4 @@
+import { isSameAddress } from '@masknet/web3-shared-evm'
 import getUnixTime from 'date-fns/getUnixTime'
 import { GraphQLClient, gql } from 'graphql-request'
 import stringify from 'json-stable-stringify'
@@ -60,7 +61,7 @@ const verifyActiveLock = (data: { lock: string; address: string; chain: number }
     })
 }
 
-export const verifyPurchase = async (_userAddress: String, _lockAddress: String, _lockChain: number) => {
+export const verifyPurchase = async (_userAddress: string, _lockAddress: string, _lockChain: number) => {
     const query = gql`
         query locks($address: String!) {
             locks(where: { address: $address }) {
@@ -76,16 +77,13 @@ export const verifyPurchase = async (_userAddress: String, _lockAddress: String,
     const variables = {
         address: _lockAddress,
     }
-    let flag = false
-    const data = await graphQLClients[_lockChain].request(query, variables)
-    if (data.locks[0].owner === _userAddress.toLowerCase()) {
-        flag = true
-    } else if (data.locks[0].keys.length) {
-        data.locks[0].keys.forEach((key: { owner: { id: string } }) => {
-            if (key.owner.id === _userAddress.toLowerCase()) flag = true
-        })
+    interface Lock {
+        owner: string
+        keys: Array<{ owner: { id: string } }>
     }
-    return flag
+    const data: { locks: Lock[] } = await graphQLClients[_lockChain].request(query, variables)
+    if (isSameAddress(data.locks[0].owner, _userAddress)) return true
+    return data.locks[0].keys.some((key) => isSameAddress(key.owner.id, _userAddress))
 }
 
 export const getLocks = async <UnlockLocks>(_address1: String) => {
