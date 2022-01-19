@@ -23,7 +23,7 @@ export interface verifyHolderResponse {
     }[]
 }
 
-const verifyHolder = async <verifyHolderResponse>(_lockAddress: String, _holder: String, _chain: number) => {
+const verifyHolder = async <verifyHolderResponse>(_lockAddress: string, _holder: string, _chain: number) => {
     const query = gql`
         query keyHolders($address: String!) {
             keyHolders(where: { address: $address }) {
@@ -86,7 +86,7 @@ export const verifyPurchase = async (_userAddress: string, _lockAddress: string,
     return data.locks[0].keys.some((key) => isSameAddress(key.owner.id, _userAddress))
 }
 
-export const getLocks = async <UnlockLocks>(_address1: String) => {
+export const getLocks = async <UnlockLocks>(_address1: string) => {
     const query = gql`
         query lockManager($address: String!) {
             lockManagers(where: { address: $address }) {
