@@ -95,11 +95,12 @@
             "rules": {
                 "@dimensiondev/no-builtin-base64": "error",
                 "@dimensiondev/no-default-error": "error",
+                "@dimensiondev/no-implicit-array-sort": "error",
                 "@dimensiondev/no-number-constructor": "error",
+                "@dimensiondev/no-redundant-variable": "error",
                 "@dimensiondev/no-simple-string-interpolation": "error",
                 "@dimensiondev/no-then": "error",
                 "@dimensiondev/no-timer": "error",
-                "@dimensiondev/prefer-array-sort": "error",
                 "@typescript-eslint/no-explicit-any": "error"
             }
         }

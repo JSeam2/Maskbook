@@ -80,10 +80,10 @@ async function getNftList(chainId: ChainId, account: string) {
     })
 
     const allSettled = await Promise.allSettled(promises)
-    const tokens = allSettled
+
+    return allSettled
         .map((x) => (x.status === 'fulfilled' ? x.value : null))
         .filter(Boolean) as Web3Plugin.NonFungibleToken[]
-    return tokens
 }
 
 export async function getNonFungibleAssets(

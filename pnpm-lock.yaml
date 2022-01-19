@@ -10,7 +10,7 @@ importers:
     specifiers:
       '@commitlint/cli': ^16.0.0
       '@commitlint/config-conventional': ^16.0.0
-      '@dimensiondev/eslint-plugin': ^0.0.1-20220118230812-e301206
+      '@dimensiondev/eslint-plugin': ^0.0.1-20220119073720-646f3cc
       '@dimensiondev/kit': 0.0.0-20211215044858-27d964f
       '@dimensiondev/patch-package': ^6.5.0
       '@emotion/cache': ^11.7.1
@@ -89,7 +89,7 @@ importers:
     devDependencies:
       '@commitlint/cli': 16.0.0
       '@commitlint/config-conventional': 16.0.0
-      '@dimensiondev/eslint-plugin': 0.0.1-20220118230812-e301206_eslint@8.5.0
+      '@dimensiondev/eslint-plugin': 0.0.1-20220119073720-646f3cc_eslint@8.5.0
       '@dimensiondev/patch-package': 6.5.0
       '@jest/globals': 27.4.4
       '@magic-works/i18n-codegen': 0.0.6_typescript@4.6.0-dev.20211202
@@ -3454,13 +3454,11 @@ packages:
       '@msgpack/msgpack': 1.12.2
     dev: false
 
-  /@dimensiondev/eslint-plugin/0.0.1-20220118230812-e301206_eslint@8.5.0:
-    resolution: {integrity: sha512-2On11PSOb4Y+1OcFxQb5e+Ao+eAXOB8T5mTFmEaxJ5m1FbvqZPKMihZuijuRKFAD3cUcz/nvSMoEzYL02sWAuw==, tarball: download/@dimensiondev/eslint-plugin/0.0.1-20220118230812-e301206/3caef07e6575c8a426f890c28603dd736738febc44b42c2d61d31c1099f58b7e}
-    engines: {node: '>= 14'}
+  /@dimensiondev/eslint-plugin/0.0.1-20220119073720-646f3cc_eslint@8.5.0:
+    resolution: {integrity: sha512-4TPUu3TwrBSQS52qD3miMR5mOnAETtjdBB1ocTUpNl/Aqnvv6wIK2bNCbM1GQBIY2PSXVAMhYfXx5z3tIJ5UEA==, tarball: download/@dimensiondev/eslint-plugin/0.0.1-20220119073720-646f3cc/ff14868e847d103d5401391538faca1e24ca156bf5db13d8e12d77f47fb010b3}
     peerDependencies:
       eslint: '>= 8'
     dependencies:
-      bignumber.js: 9.0.2
       eslint: 8.5.0
     dev: true
 
@@ -10552,6 +10550,7 @@ packages:
 
   /bignumber.js/9.0.2:
     resolution: {integrity: sha512-GAcQvbpsM0pUb0zw1EI0KhQEZ+lRwR5fYaAp3vPOYuP7aDvGy6cVN6XHLauvF8SOga2y0dcLcjt3iQDTSEliyw==}
+    dev: false
 
   /binary-extensions/1.13.1:
     resolution: {integrity: sha512-Un7MIEDdUC5gNpcGDV97op1Ywk748MpHcFTHoYs6qnj1Z3j7I53VG3nwZhKzoBZmbdRNnb6WRdFlwl7tSDuZGw==}
