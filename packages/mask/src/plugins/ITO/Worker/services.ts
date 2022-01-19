@@ -18,11 +18,11 @@ export async function getPool(pid: string) {
 export async function getAllPoolsAsSeller(address: string, page: number, endBlock: number, chainId: ChainId) {
     const { ITO2_CONTRACT_CREATION_BLOCK_HEIGHT } = getITOConstants(chainId)
 
-    //#region Get data from thegraph
+    // #region Get data from thegraph
     const poolsFromSubgraph = await subgraph.getAllPoolsAsSeller(address, page, chainId)
-    //#endregion
+    // #endregion
 
-    //#region Get data from chain which has not been synced by thegraph.
+    // #region Get data from chain which has not been synced by thegraph.
     const latestPoolFromSubgraph = poolsFromSubgraph[0]
     const startBlockNumberFromChain = getLatestBlockNumberFromSubgraph(
         latestPoolFromSubgraph,
@@ -32,10 +32,10 @@ export async function getAllPoolsAsSeller(address: string, page: number, endBloc
 
     const poolsFromChain = await chain.getAllPoolsAsSeller(chainId, startBlockNumberFromChain, endBlock, address)
 
-    //#endregion
+    // #endregion
     const poolsFromNetwork = poolsFromChain.concat(poolsFromSubgraph)
 
-    //#region Inject password from database
+    // #region Inject password from database
     const poolsFromDB = await database.getAllPoolsAsSeller(poolsFromNetwork.map((x) => x.pool.pid))
     return poolsFromNetwork
         .map((x) => {
@@ -50,7 +50,7 @@ export async function getAllPoolsAsSeller(address: string, page: number, endBloc
             }
         })
         .filter((x) => x.pool.chain_id === chainId)
-    //#endregion
+    // #endregion
 }
 
 export async function getAllPoolsAsBuyer(address: string, chainId: ChainId) {
