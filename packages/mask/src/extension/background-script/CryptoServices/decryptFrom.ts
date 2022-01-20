@@ -222,7 +222,7 @@ async function* decryptFromPayloadWithProgress_raw(
         const aesKeyEncrypted: Array<Alpha40.PublishedAESKey | SharedAESKeyGun2> = []
         if (version === -40) {
             // Deprecated payload
-            // eslint-disable-next-line import/no-deprecated
+
             const result = await GunAPI.queryVersion1PostAESKey(iv, whoAmI.userId)
             if (result === undefined) return makeError(i18n.t('service_not_share_target'))
             aesKeyEncrypted.push(result)

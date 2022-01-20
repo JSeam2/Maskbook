@@ -19,7 +19,6 @@ export async function getPartialSharedListOfPost(
     if (!nameInDB) return []
     nameInDB.forEach((_, x) => ids.add(x.toText()))
     if (version === -40) {
-        // eslint-disable-next-line import/no-deprecated
         const post = await GunAPI.getVersion1PostByHash(postSalt)
         if (!post) return []
         delete post._

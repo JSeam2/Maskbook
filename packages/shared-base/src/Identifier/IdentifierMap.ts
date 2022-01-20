@@ -104,7 +104,7 @@ IdentifierMap.prototype[Symbol.toStringTag] = 'IdentifierMap'
 export type ReadonlyIdentifierMap<IdentifierType extends Identifier, T> = ReadonlyMap<IdentifierType, T> & {
     readonly __raw_map__: ReadonlyMap<string, T>
 }
-// eslint-disable-next-line no-redeclare
+
 export const ReadonlyIdentifierMap: {
     new <IdentifierType extends Identifier, T>(
         __raw_map__: ReadonlyMap<string, T>,

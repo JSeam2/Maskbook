@@ -1,4 +1,3 @@
-/* eslint-disable no-bitwise */
 import { imgType } from '@dimensiondev/stego-js/cjs/helper.js'
 
 /** @internal */

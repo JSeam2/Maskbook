@@ -78,7 +78,6 @@ function reducer<Props extends object>(
 
 /** @deprecated */
 export function useModal<DialogProps extends object, AdditionalPropsAppendByDispatch extends Partial<DialogProps>>(
-    // eslint-disable-next-line import/no-deprecated
     Modal: React.FunctionComponent<WrappedDialogProps<DialogProps>>,
     ComponentProps?: DialogProps,
 ): [React.ReactNode, () => void, (props: AdditionalPropsAppendByDispatch) => void] {
@@ -96,7 +95,6 @@ export function useModal<DialogProps extends object, AdditionalPropsAppendByDisp
     const compositeProps =
         ComponentProps || props ? { ComponentProps: { ...ComponentProps, ...props } as DialogProps } : {}
 
-    // eslint-disable-next-line import/no-deprecated
     const modalProps: WrappedDialogProps<DialogProps> = {
         TransitionProps: { onExited },
         ...compositeProps,
