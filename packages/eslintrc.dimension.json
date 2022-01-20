@@ -21,14 +21,14 @@
         {
             "files": ["./plugins/**/*"],
             "rules": {
+                "@dimensiondev/ban-eslint-disable": "error",
                 "@dimensiondev/no-builtin-base64": "error",
                 "@dimensiondev/no-default-error": "error",
                 "@dimensiondev/no-implicit-array-sort": "error",
                 "@dimensiondev/no-number-constructor": "error",
                 "@dimensiondev/no-simple-string-interpolation": "error",
                 "@dimensiondev/no-then": "error",
-                "@dimensiondev/no-timer": "error",
-                "@typescript-eslint/no-explicit-any": "error"
+                "@dimensiondev/no-timer": "error"
             }
         }
     ]
